@@ -4,6 +4,7 @@ import cors from 'cors';
 import connectDB from './mongodb/connect.js';
 import postRoutes from './routes/PostRoutes.js';
 import dalleRoutes from './routes/DaleRoutes.js';
+import replicateRoutes from './routes/RepRoutes.js'
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(express.json({ limit : '50mb'}));
 
 app.use('/api/v1/post' , postRoutes);
 app.use('/api/v1/dalle', dalleRoutes);
+app.use('/api/v1/repli', replicateRoutes);
 
 app.get('/' , async (req,res) => {
     res.send('Hello from DALL-E!');

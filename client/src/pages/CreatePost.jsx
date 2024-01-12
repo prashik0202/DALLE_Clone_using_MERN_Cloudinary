@@ -21,7 +21,7 @@ function CreatePost() {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch('http://localhost:3000/api/v1/dalle', {
+        const response = await fetch('http://localhost:3000/api/v1/repli', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ function CreatePost() {
         });
 
         const data = await response.json();
-        setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
+        setForm({ ...form, photo: `${data}` });
       } catch (err) {
         alert(err);
       } finally {
@@ -49,7 +49,7 @@ function CreatePost() {
       setLoading(true);
 
       try {
-        const  response = await fetch('http://localhost:3000/api/v1/post', {
+        const  response = await fetch('https://dalleclone-v8m1.onrender.com/api/v1/post', {
           method: 'POST',
           headers: {
             'Content-Type' : 'application/json',
