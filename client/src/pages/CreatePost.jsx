@@ -21,7 +21,7 @@ function CreatePost() {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch('http://localhost:3000/api/v1/repli', {
+        const response = await fetch('https://dalleclone-v8m1.onrender.com/api/v1/repli', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
