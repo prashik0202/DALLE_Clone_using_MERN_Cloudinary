@@ -4,12 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { preview } from '../assets';
 import { getRandomPrompt } from '../utils';
 import { FormField , Loader } from '../components';
+import { useUser } from "@clerk/clerk-react";
 
 function CreatePost() {
 
+  const { user } = useUser();
+
   const navigate = useNavigate();
   const [form , setForm ] = useState({
-    name : '',
+    name : user.firstName,
     prompt : '',
     photo : '',
   });
@@ -90,14 +93,14 @@ function CreatePost() {
        
       <form className='mt-16 max-w-3xl' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-5'>
-          <FormField 
+          {/* <FormField 
             labelName="Your Name"
             type="text"
             name="name"
             placeholder="John Doe"
             value={form.name}
             handleChange={handleChange}
-          />
+          /> */}
           <FormField 
             labelName="Prompt"
             type="text"

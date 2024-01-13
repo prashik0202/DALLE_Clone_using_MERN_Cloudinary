@@ -1,13 +1,15 @@
 import { BrowserRouter , Link , Route , Routes } from 'react-router-dom';
 import { logo } from './assets';
 import { CreatePost, Home } from './pages';
-import { SignOutButton, SignInButton, SignedIn, SignedOut } from "@clerk/clerk-react"
+import { SignOutButton, SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react"
 import { useUser } from "@clerk/clerk-react";
+import { redirect } from "react-router-dom";
 
 function App() {
 
 
-  const { isSignedIn, user, isLoaded } = useUser();
+  const { isSignedIn, user } = useUser();
+  
 
   return (
       <BrowserRouter>
@@ -25,7 +27,7 @@ function App() {
             {
               isSignedIn ? (
                 <div className='flex'>
-                  <h1 className='my-auto'>Welcome, {user.firstName}</h1>
+                  <h1 className='my-auto text-l font-bold text-slate-800'>Welcome, {user.firstName}</h1>
                   <SignedIn>
                     
                     <Link to='/create-post'
@@ -33,7 +35,11 @@ function App() {
                     >
                       Create
                     </Link>
-                      <SignOutButton afterSignOutUrl="/" className='font-inter font-medium bg-red-700 text-white px-4 py-2 rounded-md'/>
+                      
+                    <div className='my-auto'>
+                      <UserButton afterSignOutUrl={window.location.href} className="my-auto"/>
+                    </div>
+                      
                   </SignedIn>
                 </div>
               ) : (
